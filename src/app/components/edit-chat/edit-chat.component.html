@@ -1,0 +1,14 @@
+<div *ngIf="hero">
+  <div>
+    <input [(ngModel)]="hero.message" placeholder="Message" />
+  </div>
+  <button class="action" (click)="updateHero(hero)" *ngIf="hero.id">
+    Save
+  </button>
+  <button class="action" (click)="deleteHero(hero)" *ngIf="hero.id">
+    Delete
+  </button>
+  <button class="action" (click)="createHero(hero)" *ngIf="!hero.id">
+    Send
+  </button>
+</div>
