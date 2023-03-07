@@ -12,10 +12,10 @@ import { AppComponent } from 'src/app/app.component';
 export class EditChat implements OnInit {
   @Input()  givenName: string = '';
   @Output() dataChange = new EventEmitter<string>();
-@Input() hero?: Chat;
+@Input() chat?: Chat;
 @Input() userGID: string  = '';
 
-@Output() heroesUpdated = new EventEmitter<Chat[]>();
+@Output() chatsUpdated = new EventEmitter<Chat[]>();
 
   constructor(private ChatService: ChatService,
     private appcomponent :AppComponent) { 
@@ -26,32 +26,32 @@ export class EditChat implements OnInit {
   
   }
 
-  updateHero(hero: Chat
+  updateChat(chat: Chat
     ){
-    hero.name = this.givenName;
-    hero.userId = this.userGID
+    chat.name = this.givenName;
+    chat.userId = this.userGID
     this.ChatService
-    .updateHeros(hero)
-    .subscribe((heroes: Chat[]) => this.heroesUpdated.emit(heroes));
-    this.appcomponent.initNewHero();
+    .updateChat(chat)
+    .subscribe((heroes: Chat[]) => this.chatsUpdated.emit(heroes));
+    this.appcomponent.initNewChat();
   }
 
-  deleteHero(hero: Chat
+  deleteChat(chat: Chat
     ) {
     this.ChatService
-      .deleteHeros(hero)
-      .subscribe((heroes: Chat []) => this.heroesUpdated.emit(heroes));
-      this.appcomponent.initNewHero();
+      .deleteChat(chat)
+      .subscribe((chats: Chat []) => this.chatsUpdated.emit(chats));
+      this.appcomponent.initNewChat();
   }
 
-  createHero(hero: Chat
+  createChat(chat: Chat
     ){
-      hero.name = this.givenName+": ";
-      hero.userId = this.userGID
+      chat.name = this.givenName+": ";
+      chat.userId = this.userGID
     this.ChatService
-    .createHeros(hero)
-    .subscribe((heroes: Chat[]) => this.heroesUpdated.emit(heroes));
-    this.appcomponent.initNewHero();
+    .createChat(chat)
+    .subscribe((chats: Chat[]) => this.chatsUpdated.emit(chats));
+    this.appcomponent.initNewChat();
   }
 
 }

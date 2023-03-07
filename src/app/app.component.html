@@ -6,7 +6,7 @@
 </div>
 <app-login
   class="login-container"
-  (initNewHeroEvent)="initNewHero()"
+  (initNewHeroEvent)="initNewChat()"
   (dataChange)="givenName = $event.givenName; userGID = $event.userGID"
 ></app-login>
 
@@ -56,24 +56,24 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let hero of Chats">
-        <td>{{ hero.name }}</td>
-        <td>{{ hero.message }}</td>
+      <tr *ngFor="let chat of Chats">
+        <td>{{ chat.name }}</td>
+        <td>{{ chat.message }}</td>
 
         <td>
-          <button *ngIf="hero.userId === userGID" (click)="editHero(hero)">
+          <button *ngIf="chat.userId === userGID" (click)="editChat(chat)">
             Edit
           </button>
         </td>
       </tr>
       <tr>
         <td colspan="4">
-          <button id="message" [disabled]="true" (click)="initNewHero()">
+          <button id="message" [disabled]="true" (click)="initNewChat()">
             Chat
           </button>
           <app-edit-chat
-            [hero]="heroToEdit"
-            (heroesUpdated)="updateHeroList($event)"
+            [chat]="chatToEdit"
+            (chatsUpdated)="updateChatList($event)"
             [givenName]="givenName"
             [userGID]="userGID"
           ></app-edit-chat>

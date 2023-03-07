@@ -15,7 +15,7 @@ export class AppComponent {
   userGID: string = '';
   title = 'Chat.UI';
   Chats: Chat[] = [];
-  heroToEdit?: Chat;
+  chatToEdit?: Chat;
 
   constructor(private ChatService: ChatService, private userService:userService) {}
 
@@ -36,19 +36,19 @@ export class AppComponent {
     this.userGID = newGID;
   }
 
-  updateHeroList(heroes: Chat[]) {
-    this.Chats = heroes;
+  updateChatList(Chats: Chat[]) {
+    this.Chats = Chats;
   }
 
-  initNewHero() {
-    this.heroToEdit = new Chat();
+  initNewChat() {
+    this.chatToEdit = new Chat();
     const message = document.getElementById('message');
     if (message) {
       message.style.display = 'none';
    }
   }
 
-  editHero(hero: Chat) {
-    this.heroToEdit = hero;
+  editChat(chat: Chat) {
+    this.chatToEdit = chat;
   }
 }

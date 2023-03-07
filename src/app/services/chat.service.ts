@@ -14,20 +14,20 @@ private url = "Chat";
     
     return this.http.get<Chat[]>(`${environment.apiUrl}/${this.url}`);
   }
-  public updateHeros(hero:Chat ) : Observable<Chat[]>{
+  public updateChat(chat:Chat ) : Observable<Chat[]>{
     
     return this.http.put<Chat[]>(`${environment.apiUrl}/${this.url}`,
-     hero);
+     chat);
   }
-  public createHeros(hero:Chat ) : Observable<Chat[]>{
+  public createChat(chat:Chat ) : Observable<Chat[]>{
     
     return this.http.post<Chat[]>(`${environment.apiUrl}/${this.url}`,
-     hero);
+     chat);
   }
   
-  public deleteHeros(hero: Chat): Observable<Chat[]> {
+  public deleteChat(chat: Chat): Observable<Chat[]> {
     return this.http.delete<Chat[]>(
-      `${environment.apiUrl}/${this.url}/id?id=${hero.id}`
+      `${environment.apiUrl}/${this.url}/id?id=${chat.id}`
     );
   }
 }

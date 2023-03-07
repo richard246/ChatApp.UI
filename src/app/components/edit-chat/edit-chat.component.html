@@ -1,14 +1,14 @@
-<div *ngIf="hero">
+<div *ngIf="chat">
   <div>
-    <input [(ngModel)]="hero.message" placeholder="Message" />
+    <input [(ngModel)]="chat.message" placeholder="Message" />
   </div>
-  <button class="action" (click)="updateHero(hero)" *ngIf="hero.id">
+  <button class="action" (click)="updateChat(chat)" *ngIf="chat.id">
     Save
   </button>
-  <button class="action" (click)="deleteHero(hero)" *ngIf="hero.id">
+  <button class="action" (click)="deleteChat(chat)" *ngIf="chat.id">
     Delete
   </button>
-  <button class="action" (click)="createHero(hero)" *ngIf="!hero.id">
+  <button class="action" (click)="createChat(chat)" *ngIf="!chat.id">
     Send
   </button>
 </div>
