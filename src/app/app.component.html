@@ -76,6 +76,7 @@
     border-radius: 5px;
     cursor: pointer;
     float: right; /* Position the button to the right */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   }
 
   .message-box button {
@@ -105,7 +106,24 @@
     </div>
   </div>
   <div class="message-box">
-    <button id="message" [disabled]="true" (click)="initNewChat()">Chat</button>
+    <button
+      style="
+        padding: 10px;
+        color: #ffffff;
+        background-color: #1976d2;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        float: right;
+        height: 40px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      "
+      id="message"
+      [disabled]="true"
+      (click)="initNewChat()"
+    >
+      Chat
+    </button>
     <app-edit-chat
       [chat]="chatToEdit"
       (chatsUpdated)="updateChatList($event)"
