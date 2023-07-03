@@ -1,84 +1,116 @@
 <div
   class="banner"
-  style="background-color: lightblue; padding: 10px; border: 2px solid black"
+  style="
+    background-color: lightblue;
+    padding: 10px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  "
 >
   <h1 style="margin: 0">ChatApp</h1>
+  <div id="loginDiv" class="loginDiv">
+    <div id="buttonDiv">
+      <app-login
+        class="login-container"
+        (dataChange)="givenName = $event.givenName; userGID = $event.userGID"
+      ></app-login>
+    </div>
+    <div *ngIf="givenName" style="margin-left: 10px">
+      <span>Welcome, {{ givenName }}!</span>
+    </div>
+  </div>
 </div>
-<app-login
-  class="login-container"
-  (initNewHeroEvent)="initNewChat()"
-  (dataChange)="givenName = $event.givenName; userGID = $event.userGID"
-></app-login>
-
+<div *ngIf="loading" class="loading-container">
+  <div class="loading-spinner"></div>
+  <p class="loading-text">Loading App...</p>
+</div>
 <style>
   .container {
     display: flex;
-
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    max-height: 540px; /* Set the maximum height of the container */
-    overflow-y: scroll;
-    margin-top: 10px;
-    flex-direction: column-reverse;
-    padding-bottom: 100px;
-  }
-  .message {
-    size: 400px;
   }
 
-  .Mtable {
-    padding-left: 50px;
-    padding-right: 50px;
-    height: 30px;
-    color: white;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(to bottom, #413f3f, #3b3a3a);
-  }
-  .mtable-wrapper {
-    max-height: 300;
-    overflow-y: scroll;
-  }
-
-  td[colspan="4"] {
-    background: linear-gradient(to bottom, #636262, #747373);
+  .chat-card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
     padding: 10px;
+    width: 800px; /* Change this */
+    max-height: 500px;
+    overflow-y: auto;
+  }
 
-    border-radius: 10px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  .message-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    width: 800px; /* And this */
+  }
+
+  .chat-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  .chat-card-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chat-card button {
+    padding: 10px;
+    color: #ffffff;
+    background-color: #1976d2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right; /* Position the button to the right */
+  }
+
+  .message-box button {
+    padding: 10px;
+    color: #ffffff;
+    background-color: #1976d2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .message-box button:disabled {
+    background-color: #cccccc;
   }
 </style>
 
 <div class="container">
-  <table class="Mtable">
-    <thead>
-      <tr>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let chat of Chats">
-        <td>{{ chat.name }}</td>
-        <td>{{ chat.message }}</td>
-
-        <td>
-          <button *ngIf="chat.userId === userGID" (click)="editChat(chat)">
-            Edit
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="4">
-          <button id="message" [disabled]="true" (click)="initNewChat()">
-            Chat
-          </button>
-          <app-edit-chat
-            [chat]="chatToEdit"
-            (chatsUpdated)="updateChatList($event)"
-            [givenName]="givenName"
-            [userGID]="userGID"
-          ></app-edit-chat>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="chat-card-container" #chatContainer>
+    <div *ngFor="let chat of Chats" class="chat-card">
+      <div class="chat-card-content">
+        <h4>{{ chat.name }}</h4>
+        <p>{{ chat.message }}</p>
+      </div>
+      <button *ngIf="chat.userId === userGID" (click)="editChat(chat)">
+        Edit
+      </button>
+    </div>
+  </div>
+  <div class="message-box">
+    <button id="message" [disabled]="true" (click)="initNewChat()">Chat</button>
+    <app-edit-chat
+      [chat]="chatToEdit"
+      (chatsUpdated)="updateChatList($event)"
+      [givenName]="givenName"
+      [userGID]="userGID"
+    ></app-edit-chat>
+  </div>
 </div>

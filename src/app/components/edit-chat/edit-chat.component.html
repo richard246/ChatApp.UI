@@ -1,14 +1,59 @@
-<div *ngIf="chat">
-  <div>
-    <input [(ngModel)]="chat.message" placeholder="Message" />
-  </div>
-  <button class="action" (click)="updateChat(chat)" *ngIf="chat.id">
+<div
+  *ngIf="chat"
+  class="message-box"
+  style="flex-direction: row; align-items: center"
+>
+  <input
+    [(ngModel)]="chat.message"
+    placeholder="Message"
+    style="
+      margin-right: 10px;
+      padding: 10px;
+      flex-grow: 1;
+      box-sizing: border-box;
+    "
+  />
+  <button
+    class="action"
+    (click)="updateChat(chat)"
+    *ngIf="chat.id"
+    style="margin-left: 5px"
+  >
     Save
   </button>
-  <button class="action" (click)="deleteChat(chat)" *ngIf="chat.id">
+  <button
+    class="action"
+    (click)="deleteChat(chat)"
+    *ngIf="chat.id"
+    style="margin-left: 5px"
+  >
     Delete
   </button>
-  <button class="action" (click)="createChat(chat)" *ngIf="!chat.id">
+  <button
+    class="action"
+    (click)="createChat(chat)"
+    *ngIf="!chat.id"
+    style="margin-left: 5px"
+  >
     Send
   </button>
 </div>
+
+<style>
+  .message-box input,
+  .message-box .action {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+  }
+
+  .message-box .action {
+    color: #ffffff;
+    background-color: #1976d2;
+    cursor: pointer;
+  }
+
+  .message-box input {
+    border: 1px solid #1976d2;
+  }
+</style>
